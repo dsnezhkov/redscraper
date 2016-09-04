@@ -1,0 +1,17 @@
+{
+  "name": "phishscraper",
+  "version": "1.0.0",
+  "description": "Scrape site in Flask format",
+  "main": "scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^0.30.0",
+    "glob": "^7.0.6",
+    "path": "^0.12.7",
+    "website-scraper": "^1.1.1"
+  }
+}
