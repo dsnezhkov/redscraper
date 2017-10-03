@@ -46,15 +46,18 @@ scraper.scrape({
 	})
 
 
-	glob(dir + "/*.html", null, function (er, files) {
-		files.forEach(function (item, index, array) {
-  			//console.log(item, index);
-		   console.log("Moving " +  item + " to " + templatedir )
-			fs.move(item, templatedir + path.basename(item), {clobber: true}, function (err) {
-			  if (err) return console.error(err)
-			})	
+   const mExtensions = ['/*.html', '/*.dll'];  
+	mExtensions.forEach(function(mext) {
+		glob(dir + mext, null, function (er, files) {
+			files.forEach(function (item, index, array) {
+				//console.log(item, index);
+				console.log("Moving " +  item + " to " + templatedir )
+				fs.move(item, templatedir + path.basename(item), {clobber: true}, function (err) {
+				  if (err) return console.error(err)
+				})	
+			});
 		});
-	})
+	});
 
  
 	

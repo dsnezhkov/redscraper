@@ -1,5 +1,47 @@
-## Hook Examples
+## JS Hook
 
+### [Scraper]
+
+`config/default.json`
+```json
+{
+  "site": {
+    "name": "IBM",
+    "scraper": {
+      "urls": [
+         { "url": "https://ibm.com", "filename": "index.html" },
+         { "url": "https://ibm.com/error", "filename": "error.html" }
+       ]
+    }
+  }
+}
+```
+
+
+`./redscrub.sh` -> scrapes into  `site.name` in config file
+
+### [Content Server]
+
+`/usr/local/bin/python $TOPSITE/server.py`
+
+
+### Insert shim
+
+1. Understand the logic flow on the page - where to inject
+2. Review form for fields and record them in config file
+
+Inject `hook.shim` into your `./template/<file.html>, ./template/<other_file.html> ...` (e.g. `index.html`)
+with :
+
+```
+{% autoescape false %}
+   {% for hb in hook_blob -%}
+      {{ hb }}
+   {% endfor -%}
+{% endautoescape %}
+```
+
+### Examples
 ```javascript
 <!--
  Examples of hook functions that could be put on form submission either

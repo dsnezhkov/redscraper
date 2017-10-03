@@ -1,11 +1,29 @@
 {
-  "site": {
-	 "name": "IBM",
-    "scraper": {
-    	"urls": [
-			{ "url": "https://ibm.com", "filename": "index.html" },
-			{ "url": "https://ibm.com/error", "filename": "error.html" }
-		 ]
+    "site": {
+        "name": "DOWCorning",
+        "scraper": {
+            "urls": [{
+                    "url": "https://owam.dowcorning.com/CookieAuth.dll?GetLogon?curl=Z2FowaZ2F&reason=0&formdir=1",
+                    "filename": "index.html"
+                },
+                {
+                    "url": "https://owam.dowcorning.com/CookieAuth.dll",
+                    "filename": "error.html"
+                }
+            ]
+				
+        },
+        "server": {
+            "listen-host": "0.0.0.0",
+            "listen-port": 8000,
+            "hook-shims": [{
+                    "filename": "CookieAuth.jsm"
+                },
+                {
+                    "filename": "Error.jsm"
+                }
+            ],
+            "remap-host": "https://owam.dowcorning.com"
+        }
     }
-  }
 }

