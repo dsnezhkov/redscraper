@@ -17,6 +17,9 @@ fs.removeSync(dir);
 scraper.scrape({
   // Modify URL as needed.
   urls: config.get('site.scraper.urls'),
+  urlFilter: function(url){
+    return url.indexOf('GetPic') === 0;
+  },
   directory: dir,
   subdirectories: [
     {directory: 'static/img', extensions: ['.jpg', '.jpeg', '.png', '.svg', '.gif']},
