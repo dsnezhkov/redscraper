@@ -1,0 +1,11 @@
+{
+  "site": {
+	 "name": "IBM",
+    "scraper": {
+    	"urls": [
+			{ "url": "https://ibm.com", "filename": "index.html" },
+			{ "url": "https://ibm.com/error", "filename": "error.html" }
+		 ]
+    }
+  }
+}

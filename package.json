@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "D.Snezhkov",
-  "license": "GPL while at IBM Corporation",
+  "license": "BSD-2-Clause",
   "dependencies": {
     "fs-extra": "^0.30.0",
     "glob": "^7.0.6",
