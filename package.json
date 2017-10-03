@@ -1,13 +1,13 @@
 {
-  "name": "phishscraper",
+  "name": "RedScrub",
   "version": "1.0.0",
-  "description": "Scrape site in Flask format",
-  "main": "gscraper.js",
+  "description": "Scrape site in Flask format. Shimify the site for credential steal.",
+  "main": "redscrub.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "D.Snezhkov",
+  "license": "GPL while at IBM Corporation",
   "dependencies": {
     "fs-extra": "^0.30.0",
     "glob": "^7.0.6",
