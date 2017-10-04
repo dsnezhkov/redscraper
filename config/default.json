@@ -1,29 +1,33 @@
 {
     "site": {
-        "name": "DOWCorning",
+        "name": "DOWBenefits",
         "scraper": {
-            "urls": [{
-                    "url": "https://owam.dowcorning.com/CookieAuth.dll?GetLogon?curl=Z2FowaZ2F&reason=0&formdir=1",
-                    "filename": "index.html"
-                },
-                {
-                    "url": "https://owam.dowcorning.com/CookieAuth.dll",
-                    "filename": "error.html"
-                }
-            ]
-				
+            "urls": [
+                    {
+                    "url": "https://dowbenefits.ehr.com/ESS/home/Login.aspx",
+                    "filename": "DOWBenefits/templates/Login.aspx"
+                    },
+                    {
+                    "url": "https://dowbenefits.ehr.com/ESS/Client/Home/DowChemSetPassword.aspx",
+                    "filename": "DOWBenefits/templates/DowChemSetPassword.aspx"
+                    }
+             ]
+
         },
         "server": {
             "listen-host": "0.0.0.0",
             "listen-port": 8000,
-            "hook-shims": [{
-                    "filename": "CookieAuth.jsm"
-                },
-                {
-                    "filename": "Error.jsm"
-                }
+            "shims": [
+		     { 
+		      "filename": "DOWBenefits/templates/Login.aspx", 
+		      "shim": "DOWBenefits/templates/Login.jsm" 
+		     },
+		     {  
+	              "filename": "DOWBenefits/templates/DowChemSetPassword.aspx",
+		      "shim": "DOWBenefits/templates/DowChemSetPassword.jsm"
+		     }
             ],
-            "remap-host": "https://owam.dowcorning.com"
+            "remap-host": "https://dowbenefits.ehr.com/ESS"
         }
     }
 }

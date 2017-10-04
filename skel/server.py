@@ -10,6 +10,7 @@ app = Flask(__name__)
 
 config={}
 
+# One of the landing pages
 @app.route('/')
 def show_index():
 
@@ -22,6 +23,19 @@ def show_index():
 
     return render_template(config['site']['scraper']['urls'][0]['filename'], hook_blob=hook_blob)
 
+# Example: Add scraped page to be hooked by the local server
+#@app.route('/Client/Home/DowChemSetPassword.aspx')
+#def setpass():
+#    hook_blob = []
+#    try:
+#       with open (config['site']['server']['hook-shims'][1]['filename'], "r") as shim:
+#          hook_blob=shim.readlines()
+#    except EnvironmentError: # parent of IOError, OSError *and* WindowsError where available
+#       print("Shim file error", file=sys.stderr)
+#
+#    return render_template(config['site']['scraper']['urls'][1]['filename'], hook_blob=hook_blob)
+
+# All the rest paths arre traveling to the destination unchanged
 @app.route('/<path:other>')
 def other(other):
    remap_host = config['site']['server']['remap-host']
@@ -31,6 +45,7 @@ def other(other):
    return r.content
 
 
+# The route we are postign hooked form (elements of the from) to 
 @app.route("/save",  methods=['POST'])
 def save_data():
 

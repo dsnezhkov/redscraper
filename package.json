@@ -9,9 +9,11 @@
   "author": "D.Snezhkov",
   "license": "BSD-2-Clause",
   "dependencies": {
+    "config": "^1.26.2",
     "fs-extra": "^0.30.0",
     "glob": "^7.0.6",
     "path": "^0.12.7",
+    "phantomjs": "^2.1.7",
     "website-scraper": "^1.1.1"
   }
 }
