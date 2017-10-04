@@ -9,6 +9,9 @@ import requests
 app = Flask(__name__)
 
 config={}
+config_file="./default.json"
+with open(config_file) as config_file:
+    config = json.load(config_file)
 
 # One of the landing pages
 @app.route('/')
@@ -68,9 +71,6 @@ def save_data():
     return '', 200 # We want to be quiet in browser console even if unknown error occurs, change to 400 to debug
 
 if __name__ == '__main__':
-
-    config_file="./default.json"
-    with open(config_file) as config_file:
-        config = json.load(config_file)
+    # leave app here for gunicorn
     app.run(debug=True, host=config['site']['server']['listen-host'], port=config['site']['server']['listen-port'])
 
