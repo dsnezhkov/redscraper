@@ -20,6 +20,7 @@ do
 	[ -f $SKELF ] && cp $SKELF $TOPSITE/
 done
 
+mkdir $TOPSITE/static 
 touch $TOPSITE/__init__.py
 echo "done"
 
